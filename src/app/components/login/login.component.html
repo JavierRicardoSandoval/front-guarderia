@@ -1,0 +1,38 @@
+<div class="container bordes bg-light">
+    <div class="row">
+        <div class="col-7">
+            <img src="../../../assets/images/dogs.jpeg" class="ml-0 img-fluid" alt="">
+        </div>
+        <div class="col-5">
+            <div class="row mt-5 me-1 mb-3">
+                <div class="col-12 text-center">
+                    <span class="h3">INICIA SESIÓN</span>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <form [formGroup]="formLogin">
+                        <mat-form-field class="col-12 mt-2" appearance="fill">
+                            <mat-label>Email:</mat-label>
+                            <input id="email" type="email" matInput formControlName="email" placeholder="email@ejemplo.com">
+                            <mat-error *ngIf="formLogin.controls.email.errors">
+                              Por favor ingrese una dirección de correo válida
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="col-12 mt-2" appearance="fill">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                            <button class="sin-bordes" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formLogin.controls.password.errors">
+                                La contraseña debe tener al menos 8 caracteres
+                            </mat-error>
+                        </mat-form-field>
+                        <button mat-raised-button class="col-12 mt-4" (click)="onSubmit()" color="primary" [disabled]="!formLogin.valid">ACCEDER</button>   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

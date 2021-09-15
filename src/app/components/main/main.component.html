@@ -1,0 +1,102 @@
+<div class="container bordes bg-light">
+    <div class="row">
+        <div class="col-12 text-center">
+            <span class="h3">GUARDERIA MASCOTAS</span>
+        </div>
+    </div>
+    <div class="mt-4 wd-80 mg-l-10">
+        <form [formGroup]="formSearch">
+            <div class="row">
+                <div class="col-4">
+                    <mat-form-field class="wd-100" appearance="fill">
+                        <mat-label>Selecciona tipo:</mat-label>
+                        <mat-select formControlName="tipo">
+                            <mat-option value="1">Mascota</mat-option>
+                            <mat-option value="2">Propietario</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-8">
+                    <mat-form-field class="wd-100" appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input type="tel" matInput formControlName="nombre" placeholder="Nombre o parte del mismo">
+                        <button class="sin-bordes" mat-icon-button (click)="onSubmitSearch()" matSuffix [disabled]="!formSearch.valid">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </button>
+                        <mat-error *ngIf="formSearch.controls.nombre.errors">
+                            Debe ingresar un nombre o parte del mismo para realizar la busqueda.
+                        </mat-error>
+                    </mat-form-field>
+                </div> 
+            </div>
+        </form>
+    </div>
+    <div class="row mt-4 mb-3">
+        <div class="col-12" *ngIf="formSearch.controls['tipo'].value == 1">
+            <table mat-table [dataSource]="pets" class="mat-elevation-z8 wd-80 mg-l-10 mb-4">
+                <!-- id Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+              
+                <!-- Breed Column -->
+                <ng-container matColumnDef="breed">
+                  <th mat-header-cell *matHeaderCellDef> Raza </th>
+                  <td mat-cell *matCellDef="let element"> {{element.breed}} </td>
+                </ng-container>
+              
+                <!-- last_deworming Column -->
+                <ng-container matColumnDef="last_deworming">
+                    <th mat-header-cell *matHeaderCellDef> Última desparacitación </th>
+                    <td mat-cell *matCellDef="let element"> {{element.last_deworming}} </td>
+                </ng-container>
+
+                <!-- last_deworming Column -->
+                <ng-container matColumnDef="physical_features">
+                    <th mat-header-cell *matHeaderCellDef> Caracteristicas </th>
+                    <td mat-cell *matCellDef="let element"> {{element.physical_features}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="columnsTablePets"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnsTablePets;"></tr>
+            </table>              
+        </div>
+        <div class="col-12" *ngIf="formSearch.controls['tipo'].value == 2">
+            <table mat-table [dataSource]="owners" class="mat-elevation-z8 wd-80 mg-l-10 mb-4">
+                <!-- id Column -->
+                <ng-container matColumnDef="cedula">
+                  <th mat-header-cell *matHeaderCellDef> Cedula </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="fullname">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+                </ng-container>
+              
+                <!-- Breed Column -->
+                <ng-container matColumnDef="phone">
+                  <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+                  <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                </ng-container>
+              
+                <!-- last_deworming Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="columnsTableOwners"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnsTableOwners;"></tr>
+            </table>  
+        </div>
+    </div>
+</div>
